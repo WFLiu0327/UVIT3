@@ -19,7 +19,11 @@ from utils import (
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkpoint", type=Path, required=True)
+    parser.add_argument("--checkpoint", type=Path, help="可选；默认加载 weights/<dataset>/seed<seed>/best.pth")
+    parser.add_argument("--dataset", choices=tuple(DATASETS), default=None,
+                        help="选择随仓库提供的权重；默认 BUSI")
+    parser.add_argument("--seed", type=int, choices=SEEDS, default=None,
+                        help="选择随仓库提供的权重；默认 2981")
     parser.add_argument("--image", type=Path, help="单张 RGB 图像；不指定时评估固定验证集")
     parser.add_argument("--output", type=Path, help="单张图像的预测掩膜路径")
     parser.add_argument("--batch-size", type=int, default=8)
@@ -30,7 +34,13 @@ def main() -> None:
     if not args.image and args.output:
         parser.error("--output 仅用于 --image")
 
-    checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+    checkpoint_path = args.checkpoint or (
+        Path(__file__).resolve().parent / "weights" / (args.dataset or "BUSI")
+        / f"seed{args.seed or 2981}" / "best.pth"
+    )
+    if not checkpoint_path.is_file():
+        raise FileNotFoundError(f"checkpoint not found: {checkpoint_path}")
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     config = checkpoint["config"]
     if config.get("model") != "uvit3":
         raise ValueError("checkpoint model must be uvit3")
@@ -38,6 +48,10 @@ def main() -> None:
     dataset = str(config["dataset"]).upper()
     if seed not in SEEDS or dataset not in DATASETS:
         raise ValueError("checkpoint does not use the fixed dataset and seed protocol")
+    if args.dataset is not None and args.dataset != dataset:
+        raise ValueError("--dataset does not match checkpoint dataset")
+    if args.seed is not None and args.seed != seed:
+        raise ValueError("--seed does not match checkpoint seed")
     set_seed(seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = build_uvit3().to(device)
@@ -73,7 +87,7 @@ def main() -> None:
     destination = Path(__file__).resolve().parent / "output" / dataset / f"seed{seed}"
     summary, rows = evaluate(model, loader, device, destination / "predictions")
     summary.update({"dataset": dataset, "seed": seed, "split_sha256": digest,
-                    "checkpoint": str(args.checkpoint.resolve()), "data_audit": audit})
+                    "checkpoint": str(checkpoint_path.resolve()), "data_audit": audit})
     save_json(destination / "metrics.json", summary)
     save_csv(destination / "cases.csv", rows)
     print(f"metrics={destination / 'metrics.json'}")

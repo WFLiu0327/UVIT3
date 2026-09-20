@@ -1,4 +1,4 @@
-name: uvit3
+name: uvit3a
 channels:
   - conda-forge
 dependencies:

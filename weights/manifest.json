@@ -1,0 +1,74 @@
+{
+  "model": "uvit3",
+  "datasets": {
+    "BUSI": {
+      "2981": {
+        "path": "weights/BUSI/seed2981/best.pth",
+        "sha256": "22e85cfe99abf87d29b7ba274aaad2f1bf6bd4737b96f0598acc4380ff442f9a",
+        "split_sha256": "34e5a47aac3eb839088896a8794c861f04f8de181379c33f1ee2b02dca9519dc",
+        "epoch": 102,
+        "best_iou": 0.7498032753765755
+      },
+      "6142": {
+        "path": "weights/BUSI/seed6142/best.pth",
+        "sha256": "c768de24617c043c3c234112b1e7142160e7bc67ebf2009e3b4f4b981ae440b7",
+        "split_sha256": "25a5e49674ff5b5a3f66b05f8fffc480db5b24031b4e87189670024773f2fd36",
+        "epoch": 53,
+        "best_iou": 0.6900126636535987
+      },
+      "1187": {
+        "path": "weights/BUSI/seed1187/best.pth",
+        "sha256": "3f5dabc85802ed6db141cdbbdba08c28a1a797ab8a279b139c6a671c202a63ed",
+        "split_sha256": "c264c2c0b5cdb03fb98f3e82420b2059d2d92cca481cac34d99934d37b2c11b5",
+        "epoch": 94,
+        "best_iou": 0.74875343190006
+      }
+    },
+    "CVC": {
+      "2981": {
+        "path": "weights/CVC/seed2981/best.pth",
+        "sha256": "a9d38e6864810e435d11c8760eadde0418cc2e4d61fd165d08402630b72ccf24",
+        "split_sha256": "f61666ee21e9a113a94ab53727fa53ad10cbddf07c4aebbb1f0322b6d5502776",
+        "epoch": 105,
+        "best_iou": 0.8853661752848903
+      },
+      "6142": {
+        "path": "weights/CVC/seed6142/best.pth",
+        "sha256": "c8015e4b9b2813a4bfb4267b259c48adad0451783b7854483969f4275655a9a8",
+        "split_sha256": "60812a2711272ec7b641cb7836b9244bc8915d2b31ac87f02f863869e76c954e",
+        "epoch": 106,
+        "best_iou": 0.8743392894592891
+      },
+      "1187": {
+        "path": "weights/CVC/seed1187/best.pth",
+        "sha256": "0da563514c34dcf1c47b4e7643851bacad3358383aa40cf3aad764197a027e5a",
+        "split_sha256": "c76f795e6e0399f3f7ea89ddf95af2978068ca572106ee5bb0456ed05b5d0c87",
+        "epoch": 103,
+        "best_iou": 0.8662702411478161
+      }
+    },
+    "GLAS": {
+      "2981": {
+        "path": "weights/GLAS/seed2981/best.pth",
+        "sha256": "0df0aa0390504ca43a9172cd93b22cd7e8d8de327645842f9ffdbd133d91079b",
+        "split_sha256": "fb56a8d3a034f7897c0acd4ac71e200fe29a962bb7e126d4a5a9b4349c6649b0",
+        "epoch": 85,
+        "best_iou": 0.8595312090166219
+      },
+      "6142": {
+        "path": "weights/GLAS/seed6142/best.pth",
+        "sha256": "51b07026b293ccedbff8bada9c48a784c8069b429970635c9d6c0d8b3af6fa81",
+        "split_sha256": "332785f4aaf99b3507d5eaa464722afc1617a8ed420438bc7b45c1089b56754a",
+        "epoch": 60,
+        "best_iou": 0.863269179015577
+      },
+      "1187": {
+        "path": "weights/GLAS/seed1187/best.pth",
+        "sha256": "04214c0bb90f752ad239e24bf39db74c25494467b94dd1625842a93f68636162",
+        "split_sha256": "a4142f7ab5815de5bd0fd1e7d117631f694b254ca1ae73133465e176a2626bdc",
+        "epoch": 71,
+        "best_iou": 0.8643224832880075
+      }
+    }
+  }
+}
