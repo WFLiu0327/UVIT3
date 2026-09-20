@@ -113,6 +113,16 @@ python test.py --dataset BUSI --seed 2981 --batch-size 8 --workers 4
 
 Results are written to `output/BUSI/seed2981/metrics.json`, `cases.csv`, and `predictions/`.
 
+The evaluated pretrained checkpoints have per-seed CSV files and three-seed mean ± standard deviation tables in [`results/`](results/README.md). To reproduce all nine validation outputs with the local weights:
+
+```bash
+for dataset in BUSI CVC GLAS; do
+  for seed in 2981 6142 1187; do
+    python test.py --dataset "$dataset" --seed "$seed" --batch-size 1 --workers 0
+  done
+done
+```
+
 Predict one RGB image and restore the mask to the input image size:
 
 ```bash
